@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BDO Boosting and Piloting</title>
+  <meta name="description" content="Black Desert Online boosting and piloting services with clear pricing and fast Discord contact." />
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+
+    /* UPDATED: background image + dark overlay */
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background:
+        linear-gradient(rgba(11,15,23,0.85), rgba(11,15,23,0.95)),
+        url("background.jpg");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #e7eaf1;
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; }
+
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 24px; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      background: rgba(8, 12, 20, 0.72);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .topbarInner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 24px;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+    }
+
+    .logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(125, 60, 255, 1), rgba(0, 200, 255, 1));
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    }
+
+    .nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav a {
+      padding: 8px 12px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      color: rgba(231, 234, 241, 0.92);
+    }
+
+    .nav a:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.10);
+    }
+
+    .nav a.active {
+      background: rgba(125, 60, 255, 0.16);
+      border-color: rgba(125, 60, 255, 0.45);
+    }
+
+    .ctaRow { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .btn {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.06);
+      color: #e7eaf1;
+      padding: 10px 14px;
+      border-radius: 14px;
+      transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.09);
+      border-color: rgba(255, 255, 255, 0.20);
+    }
+
+    .btnPrimary {
+      border-color: rgba(125, 60, 255, 0.55);
+      background: linear-gradient(135deg, rgba(125, 60, 255, 0.35), rgba(0, 200, 255, 0.25));
+    }
+
+    .pill {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      color: rgba(231, 234, 241, 0.90);
+      font-size: 14px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #35f29b;
+      box-shadow: 0 0 0 4px rgba(53, 242, 155, 0.10);
+    }
+
+    .hero {
+      padding: 36px 0 22px;
+    }
+
+    .heroGrid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .panel {
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
+    }
+
+    .heroMain {
+      padding: 26px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .heroMain:before {
+      content: "";
+      position: absolute;
+      inset: -40px -40px auto auto;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle at 30% 30%, rgba(125, 60, 255, 0.35), transparent 65%);
+      filter: blur(2px);
+      pointer-events: none;
+    }
+
+    h1 {
+      margin: 14px 0 10px;
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1.12;
+      letter-spacing: 0.2px;
+    }
+
+    .sub {
+      margin: 0 0 16px;
+      color: rgba(231, 234, 241, 0.82);
+      font-size: 16px;
+      max-width: 62ch;
+    }
+
+    .trustGrid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .trustCard {
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(0, 0, 0, 0.18);
+    }
+
+    .trustCard b { display: block; margin-bottom: 4px; }
+    .muted { color: rgba(231, 234, 241, 0.74); font-size: 14px; }
+
+    .heroSide {
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .sideCard {
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(0, 0, 0, 0.18);
+    }
+
+    .priceBig {
+      font-size: 28px;
+      font-weight: 850;
+      letter-spacing: 0.2px;
+      margin: 6px 0 6px;
+    }
+
+    .section {
+      padding: 18px 0 8px;
+    }
+
+    .sectionHeader {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .sectionHeader h2 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: 0.2px;
+    }
+
+    .grid3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      padding: 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .card h3 { margin: 0 0 8px; font-size: 17px; }
+    .list { margin: 10px 0 0; padding-left: 18px; color: rgba(231, 234, 241, 0.82); }
+    .list li { margin: 6px 0; }
+
+    .pricingGrid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .pricingRow {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .priceCard {
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.18));
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.38);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .priceCard.featured {
+      border-color: rgba(125, 60, 255, 0.55);
+      background: linear-gradient(135deg, rgba(125, 60, 255, 0.22), rgba(0, 200, 255, 0.14));
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(0, 0, 0, 0.20);
+      font-size: 13px;
+      color: rgba(231, 234, 241, 0.90);
+    }
+
+    .priceCard .title {
+      font-weight: 850;
+      letter-spacing: 0.2px;
+      font-size: 18px;
+      margin: 10px 0 6px;
+    }
+
+    .priceCard .price {
+      font-size: 34px;
+      font-weight: 900;
+      margin: 0 0 8px;
+    }
+
+    .fine {
+      font-size: 13px;
+      color: rgba(231, 234, 241, 0.72);
+      margin: 0;
+    }
+
+    .divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.10);
+      margin: 14px 0;
+    }
+
+    .miniGrid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .mini {
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(0, 0, 0, 0.16);
+    }
+
+    .contactPanel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    label { display: block; font-size: 14px; color: rgba(231, 234, 241, 0.86); margin: 10px 0 6px; }
+    input, textarea {
+      width: 100%;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(0, 0, 0, 0.18);
+      color: #e7eaf1;
+      outline: none;
+    }
+    textarea { min-height: 120px; resize: vertical; }
+
+    .footer {
+      padding: 22px 0 30px;
+      color: rgba(231, 234, 241, 0.68);
+      font-size: 13px;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      background: rgba(10, 14, 22, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: rgba(231, 234, 241, 0.92);
+      padding: 10px 14px;
+      border-radius: 14px;
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-4px);
+    }
+
+    .page { display: none; }
+    .page.active { display: block; }
+
+    @media (max-width: 920px) {
+      .heroGrid { grid-template-columns: 1fr; }
+      .pricingGrid { grid-template-columns: 1fr; }
+      .pricingRow { grid-template-columns: 1fr; }
+      .grid3 { grid-template-columns: 1fr; }
+      .contactPanel { grid-template-columns: 1fr; }
+      .trustGrid { grid-template-columns: 1fr; }
+      .topbarInner { align-items: flex-start; flex-direction: column; }
+      .nav { justify-content: flex-start; }
+    }
+  </style>
+  <script type='text/javascript' src='https://api.netlify.com/CtXyE_3G9VHRTljnU7ADyf9cDZpiXfvhrmI7Idft5KbtISJnaYVf-3Wi8xF0v_kzEEJQgWF8U7dRmVK4ekBePQSiAq78XGxQdj13j5MVBhdFcesbOTE22n-LR9HLOf8-P9q_JYjlZC4Ng2vn_PK0ar0UJTDfaDiegaZdtTT1HXMnT5lJAwaDJYql0YoFwr06K6eI0zv4MlJZFV-LCfM1cET3FzBgRBFoT-6AgbGXYYeY9BttS2Y2LSYSXSCw5_4nTPAo_o4k0hzZA7Rse3JpZZkTMcURTkxOJpXrFbMi67X-Yd-_rP_qslVxMxGtwXucHkuG-TR7YDNvFP0s92jucs1IqD9EY6Eo4UQaR86s1lGIsp4McqtKSWLgNpZQZMgkNNVT3iZIS5APzCxodhxpTKP8DLTKuLSGNXb2gI5riPeYR8E2PozzW_-5xWFEGBq2V-bHLjfWYFyfXRwFDf1WpewhWX0Q1EvCBDF2w7RYFG_Wth65wmQ-4sb54wt75rkUwSyJWFEfsoQRMZNbDv665j-Zq3P0Bq93D0f9wQ'></script>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbarInner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div style="font-size: 15px; opacity: 0.95">BDO Boosting and Piloting</div>
+          <div class="muted" style="margin-top: 2px">Fast delivery, clear pricing, Discord support</div>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#home" data-route="home" class="active">Home</a>
+        <a href="#pricing" data-route="pricing">Pricing</a>
+        <a href="#requirements" data-route="requirements">Requirements</a>
+        <a href="#contact" data-route="contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- HOME -->
+    <section class="page active" id="pageHome" data-page="home">
+      <div class="hero">
+        <div class="heroGrid">
+          <div class="panel heroMain">
+            <span class="pill"><span class="dot"></span> Availability updates on Discord</span>
+            <h1>Black Desert Online boosting and piloting, built for speed and transparency</h1>
+            <p class="sub">
+              Simple pricing, clear milestones, and a smooth handoff process. Message on Discord for a quote, ETA, and service availability.
+            </p>
+            <div class="ctaRow">
+              <a class="btn btnPrimary" href="#pricing" data-route="pricing">View pricing</a>
+              <a class="btn" href="#contact" data-route="contact">Contact on Discord</a>
+              <button class="btn" id="copyDiscordTop" type="button">Copy Discord: murphy_29.</button>
+            </div>
+
+            <div class="trustGrid" aria-label="Service highlights">
+              <div class="trustCard">
+                <b>Clear checkpoints</b>
+                <div class="muted">You approve goals before anything starts</div>
+              </div>
+              <div class="trustCard">
+                <b>Quick response</b>
+                <div class="muted">Fast quotes and status updates</div>
+              </div>
+              <div class="trustCard">
+                <b>Privacy minded</b>
+                <div class="muted">No public sharing of client details</div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="panel heroSide">
+            <div class="sideCard">
+              <div class="muted">Base rate</div>
+              <div class="priceBig">$1.25 per billion silver</div>
+              <div class="muted">Final quotes can vary by region, method, and urgency</div>
+              <div class="divider"></div>
+              <div class="ctaRow">
+                <a class="btn btnPrimary" href="#contact" data-route="contact">Get a quote</a>
+                <button class="btn" id="copyDiscordSide" type="button">Copy Discord</button>
+              </div>
+            </div>
+
+            <div class="sideCard">
+              <b>What you can request</b>
+              <div class="miniGrid">
+                <div class="mini">
+                  <b>Silver services</b>
+                  <div class="muted">Clear target, clear timeline</div>
+                </div>
+                <div class="mini">
+                  <b>Account piloting</b>
+                  <div class="muted">Defined tasks with status updates</div>
+                </div>
+                <div class="mini">
+                  <b>Custom packages</b>
+                  <div class="muted">Bundle goals for better value</div>
+                </div>
+                <div class="mini">
+                  <b>Rush slots</b>
+                  <div class="muted">When available</div>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <section class="section">
+        <div class="sectionHeader">
+          <h2>How it works</h2>
+          <span class="muted">Simple process, no surprises</span>
+        </div>
+
+        <div class="grid3">
+          <div class="card">
+            <h3>1. Message on Discord</h3>
+            <div class="muted">Send your region, goal, and deadline</div>
+            <ul class="list">
+              <li>Example: 20b silver, standard pace</li>
+              <li>We confirm availability and timeline</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>2. Confirm the plan</h3>
+            <div class="muted">Clear milestones and pricing</div>
+            <ul class="list">
+              <li>Rate baseline: $1.25 per billion silver</li>
+              <li>Custom requirements are quoted upfront</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>3. Delivery and updates</h3>
+            <div class="muted">Progress updates on Discord</div>
+            <ul class="list">
+              <li>We share progress checkpoints</li>
+              <li>Handoff confirmation when complete</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="sectionHeader">
+          <h2>Important note</h2>
+          <span class="muted">Please read before ordering</span>
+        </div>
+        <div class="card">
+          <div class="muted">
+            Boosting and piloting can violate game rules and may carry penalties such as suspensions or bans.
+            If you proceed, you do so at your own risk. This site is informational and does not provide any guarantee of outcomes.
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- PRICING -->
+    <section class="page" id="pagePricing" data-page="pricing">
+      <section class="section">
+        <div class="sectionHeader">
+          <h2>Pricing</h2>
+          <span class="muted">Transparent, easy to estimate</span>
+        </div>
+
+        <div class="pricingGrid">
+          <div class="pricingRow">
+            <div class="priceCard featured">
+              <span class="badge">Main rate</span>
+              <div class="title">Silver boosting</div>
+              <div class="price">$1.25</div>
+              <p class="fine">Per billion silver</p>
+              <div class="divider"></div>
+              <ul class="list">
+                <li>Milestone based progress updates</li>
+                <li>Quote confirms region and timeline</li>
+                <li>Custom requests priced upfront</li>
+              </ul>
+              <div class="divider"></div>
+              <div class="ctaRow">
+                <a class="btn btnPrimary" href="#contact" data-route="contact">Order via Discord</a>
+                <button class="btn" id="copyDiscordPricing" type="button">Copy Discord</button>
+              </div>
+            </div>
+
+            <div class="priceCard">
+              <span class="badge">Estimator</span>
+              <div class="title">Quick estimate</div>
+              <p class="fine">Enter a target amount and see the baseline estimate</p>
+
+              <label for="billionInput">Target in billions</label>
+              <input id="billionInput" inputmode="decimal" placeholder="Example: 20" />
+
+              <div class="divider"></div>
+
+              <div class="muted">Baseline estimate</div>
+              <div class="priceBig" id="estimateOut">$0.00</div>
+              <p class="fine">This is a baseline estimate at $1.25 per billion silver</p>
+
+              <div class="divider"></div>
+              <button class="btn btnPrimary" id="estimateBtn" type="button">Calculate</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Bundles and add ons</h3>
+            <div class="muted">
+              Use Discord to request a custom package. Common add ons include rush priority, specific methods, or multi goal bundles.
+            </div>
+            <div class="divider"></div>
+            <ul class="list">
+              <li>Rush slots depend on availability</li>
+              <li>Any special requirements are quoted before start</li>
+              <li>We can combine goals for a single plan</li>
+            </ul>
+            <div class="divider"></div>
+            <div class="ctaRow">
+              <a class="btn" href="#contact" data-route="contact">Ask for a package</a>
+              <button class="btn" id="copyDiscordBundles" type="button">Copy Discord</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- REQUIREMENTS -->
+    <section class="page" id="pageRequirements" data-page="requirements">
+      <section class="section">
+        <div class="sectionHeader">
+          <h2>Requirements</h2>
+          <span class="muted">Completion speed notes</span>
+        </div>
+
+        <div class="card">
+          <h3>AP impacts completion speed</h3>
+          <div class="muted" style="margin-top: 6px">
+            Contract completion speed depends on AP (Attack Power). Accounts with at least <b>300-310 AP</b> are preferred for faster completion.
+            Lower AP accounts can still be considered, but completion time may be longer depending on gear and setup.
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="page" id="pageContact" data-page="contact">
+      <section class="section">
+        <div class="sectionHeader">
+          <h2>Contact</h2>
+          <span class="muted">Fastest reply on Discord</span>
+        </div>
+
+        <div class="contactPanel">
+          <div class="card">
+            <h3>Discord</h3>
+            <div class="muted" style="margin-top: 6px">
+              Account: <b>murphy_29.</b>
+            </div>
+            <div class="divider"></div>
+            <div class="ctaRow">
+              <button class="btn btnPrimary" id="copyDiscordContact" type="button">Copy Discord handle</button>
+              <a class="btn" href="#pricing" data-route="pricing">See pricing</a>
+            </div>
+            <div class="divider"></div>
+            <div class="muted">
+              Include your region, target silver amount, and any deadline. If you want piloting, list the tasks you want done.
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Message template</h3>
+            <div class="muted">Copy this, then paste into Discord</div>
+
+            <label for="templateBox">Template</label>
+            <textarea id="templateBox" readonly>
+Region:
+Service:
+Target:
+Deadline:
+Notes:
+Discord: murphy_29.
+            </textarea>
+
+            <div class="ctaRow">
+              <button class="btn btnPrimary" id="copyTemplate" type="button">Copy template</button>
+              <button class="btn" id="copyDiscordContact2" type="button">Copy Discord</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <div>
+            Disclaimer: Boosting and piloting may violate game rules. Proceed at your own risk.
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const discordHandle = "murphy_29."
+    const ratePerBillion = 1.25
+
+    const pages = {
+      home: document.getElementById("pageHome"),
+      pricing: document.getElementById("pagePricing"),
+      requirements: document.getElementById("pageRequirements"),
+      contact: document.getElementById("pageContact")
+    }
+
+    const navLinks = Array.from(document.querySelectorAll("[data-route]"))
+
+    function setActiveRoute(route) {
+      const r = pages[route] ? route : "home"
+
+      Object.keys(pages).forEach(key => {
+        pages[key].classList.toggle("active", key === r)
+      })
+
+      navLinks.forEach(a => {
+        a.classList.toggle("active", a.getAttribute("data-route") === r)
+      })
+
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    }
+
+    function toast(msg) {
+      const t = document.getElementById("toast")
+      t.textContent = msg
+      t.classList.add("show")
+      clearTimeout(toast._timer)
+      toast._timer = setTimeout(() => t.classList.remove("show"), 1600)
+    }
+
+    async function copyText(text) {
+      try {
+        await navigator.clipboard.writeText(text)
+        toast("Copied to clipboard")
+      } catch (e) {
+        const temp = document.createElement("textarea")
+        temp.value = text
+        document.body.appendChild(temp)
+        temp.select()
+        document.execCommand("copy")
+        temp.remove()
+        toast("Copied to clipboard")
+      }
+    }
+
+    function routeFromHash() {
+      const h = (location.hash || "#home").replace("#", "").trim().toLowerCase()
+      setActiveRoute(h)
+    }
+
+    window.addEventListener("hashchange", routeFromHash)
+    routeFromHash()
+
+    const copyButtons = [
+      "copyDiscordTop",
+      "copyDiscordSide",
+      "copyDiscordPricing",
+      "copyDiscordBundles",
+      "copyDiscordContact",
+      "copyDiscordContact2"
+    ]
+
+    copyButtons.forEach(id => {
+      const el = document.getElementById(id)
+      if (!el) return
+      el.addEventListener("click", () => copyText(discordHandle))
+    })
+
+    document.getElementById("copyTemplate").addEventListener("click", () => {
+      const template = document.getElementById("templateBox").value.trim() + "\n"
+      copyText(template)
+    })
+
+    function calculateEstimate() {
+      const raw = (document.getElementById("billionInput").value || "").replace(",", ".").trim()
+      const n = Number(raw)
+      if (!isFinite(n) || n <= 0) {
+        document.getElementById("estimateOut").textContent = "$0.00"
+        toast("Enter a valid number of billions")
+        return
+      }
+      const est = n * ratePerBillion
+      const out = est.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+      document.getElementById("estimateOut").textContent = "$" + out
+    }
+
+    document.getElementById("estimateBtn").addEventListener("click", calculateEstimate)
+    document.getElementById("billionInput").addEventListener("keydown", e => {
+      if (e.key === "Enter") calculateEstimate()
+    })
+  </script>
+</body>
+</html>
