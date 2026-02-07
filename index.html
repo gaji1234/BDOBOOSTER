@@ -10,7 +10,6 @@
     * { box-sizing: border-box; }
     html, body { height: 100%; }
 
-    /* UPDATED: background image + dark overlay */
     body {
       margin: 0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
@@ -389,7 +388,7 @@
       .nav { justify-content: flex-start; }
     }
   </style>
-  <script type='text/javascript' src='https://api.netlify.com/CtXyE_3G9VHRTljnU7ADyf9cDZpiXfvhrmI7Idft5KbtISJnaYVf-3Wi8xF0v_kzEEJQgWF8U7dRmVK4ekBePQSiAq78XGxQdj13j5MVBhdFcesbOTE22n-LR9HLOf8-P9q_JYjlZC4Ng2vn_PK0ar0UJTDfaDiegaZdtTT1HXMnT5lJAwaDJYql0YoFwr06K6eI0zv4MlJZFV-LCfM1cET3FzBgRBFoT-6AgbGXYYeY9BttS2Y2LSYSXSCw5_4nTPAo_o4k0hzZA7Rse3JpZZkTMcURTkxOJpXrFbMi67X-Yd-_rP_qslVxMxGtwXucHkuG-TR7YDNvFP0s92jucs1IqD9EY6Eo4UQaR86s1lGIsp4McqtKSWLgNpZQZMgkNNVT3iZIS5APzCxodhxpTKP8DLTKuLSGNXb2gI5riPeYR8E2PozzW_-5xWFEGBq2V-bHLjfWYFyfXRwFDf1WpewhWX0Q1EvCBDF2w7RYFG_Wth65wmQ-4sb54wt75rkUwSyJWFEfsoQRMZNbDv665j-Zq3P0Bq93D0f9wQ'></script>
+  <script type="text/javascript" src="https://api.netlify.com/CtXyE_3G9VHRTljnU7ADyf9cDZpiXfvhrmI7Idft5KbtISJnaYVf-3Wi8xF0v_kzEEJQgWF8U7dRmVK4ekBePQSiAq78XGxQdj13j5MVBhdFcesbOTE22n-LR9HLOf8-P9q_JYjlZC4Ng2vn_PK0ar0UJTDfaDiegaZdtTT1HXMnT5lJAwaDJYql0YoFwr06K6eI0zv4MlJZFV-LCfM1cET3FzBgRBFoT-6AgbGXYYeY9BttS2Y2LSYSXSCw5_4nTPAo_o4k0hzZA7Rse3JpZZkTMcURTkxOJpXrFbMi67X-Yd-_rP_qslVxMxGtwXucHkuG-TR7YDNvFP0s92jucs1IqD9EY6Eo4UQaR86s1lGIsp4McqtKSWLgNpZQZMgkNNVT3iZIS5APzCxodhxpTKP8DLTKuLSGNXb2gI5riPeYR8E2PozzW_-5xWFEGBq2V-bHLjfWYFyfXRwFDf1WpewhWX0Q1EvCBDF2w7RYFG_Wth65wmQ-4sb54wt75rkUwSyJWFEfsoQRMZNbDv665j-Zq3P0Bq93D0f9wQ"></script>
 </head>
 
 <body>
@@ -414,7 +413,6 @@
   </header>
 
   <main class="wrap">
-    <!-- HOME -->
     <section class="page active" id="pageHome" data-page="home">
       <div class="hero">
         <div class="heroGrid">
@@ -531,7 +529,6 @@
       </section>
     </section>
 
-    <!-- PRICING -->
     <section class="page" id="pagePricing" data-page="pricing">
       <section class="section">
         <div class="sectionHeader">
@@ -622,7 +619,6 @@
       </section>
     </section>
 
-    <!-- REQUIREMENTS -->
     <section class="page" id="pageRequirements" data-page="requirements">
       <section class="section">
         <div class="sectionHeader">
@@ -640,46 +636,53 @@
       </section>
     </section>
 
-    <!-- REVIEWS -->
     <section class="page" id="pageReviews" data-page="reviews">
       <section class="section">
         <div class="sectionHeader">
           <h2>Feedback and reviews</h2>
-          <span class="muted">Share your experience</span>
+          <span class="muted">Submit a review for approval</span>
         </div>
 
         <div class="contactPanel">
           <div class="card">
             <h3>Leave feedback</h3>
             <div class="muted" style="margin-top: 6px">
-              This form is for collecting text locally on the page. For official feedback, message on Discord.
+              Reviews are submitted to the website backend using Netlify Forms. Public reviews displayed here come from a separate file you control.
             </div>
 
-            <label for="reviewName">Name</label>
-            <input id="reviewName" placeholder="Optional" />
+            <form id="reviewForm" name="reviews" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+              <input type="hidden" name="form-name" value="reviews" />
 
-            <label for="reviewRating">Rating (1 to 5)</label>
-            <input id="reviewRating" inputmode="numeric" placeholder="Example: 5" />
+              <p style="display:none">
+                <label>Don’t fill this out: <input name="bot-field" /></label>
+              </p>
 
-            <label for="reviewText">Your review</label>
-            <textarea id="reviewText" placeholder="Write your feedback here"></textarea>
+              <label for="reviewName">Name</label>
+              <input id="reviewName" name="name" placeholder="Optional" />
 
-            <div class="divider"></div>
-            <div class="ctaRow">
-              <button class="btn btnPrimary" id="submitReview" type="button">Submit review</button>
-              <button class="btn" id="clearReviews" type="button">Clear local reviews</button>
-            </div>
+              <label for="reviewRating">Rating (1 to 5)</label>
+              <input id="reviewRating" name="rating" inputmode="numeric" placeholder="Example: 5" />
 
-            <div class="divider"></div>
-            <div class="muted">
-              Tip: If you want your review used as a public testimonial, send it on Discord with permission.
-            </div>
+              <label for="reviewText">Your review</label>
+              <textarea id="reviewText" name="review" placeholder="Write your feedback here"></textarea>
+
+              <div class="divider"></div>
+              <div class="ctaRow">
+                <button class="btn btnPrimary" id="submitReview" type="submit">Submit review</button>
+                <button class="btn" id="resetReview" type="button">Reset</button>
+              </div>
+
+              <div class="divider"></div>
+              <div class="muted">
+                After submission, approve and publish reviews by updating reviews.json on your site.
+              </div>
+            </form>
           </div>
 
           <div class="card">
-            <h3>Recent reviews</h3>
+            <h3>Public reviews</h3>
             <div class="muted" style="margin-top: 6px">
-              Sample reviews can be replaced by real ones. Local submissions are stored in your browser.
+              This list loads from <b>reviews.json</b> in your site root.
             </div>
 
             <div class="divider"></div>
@@ -701,7 +704,6 @@
       </section>
     </section>
 
-    <!-- CONTACT -->
     <section class="page" id="pageContact" data-page="contact">
       <section class="section">
         <div class="sectionHeader">
@@ -757,6 +759,14 @@ Discord: murphy_29.
   </main>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <form name="reviews" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+    <input type="hidden" name="form-name" value="reviews" />
+    <input name="bot-field" />
+    <input name="name" />
+    <input name="rating" />
+    <textarea name="review"></textarea>
+  </form>
 
   <script>
     const discordHandle = "murphy_29."
@@ -833,10 +843,13 @@ Discord: murphy_29.
       el.addEventListener("click", () => copyText(discordHandle))
     })
 
-    document.getElementById("copyTemplate").addEventListener("click", () => {
-      const template = document.getElementById("templateBox").value.trim() + "\n"
-      copyText(template)
-    })
+    const copyTemplateBtn = document.getElementById("copyTemplate")
+    if (copyTemplateBtn) {
+      copyTemplateBtn.addEventListener("click", () => {
+        const template = document.getElementById("templateBox").value.trim() + "\n"
+        copyText(template)
+      })
+    }
 
     function calculateEstimate() {
       const raw = (document.getElementById("billionInput").value || "").replace(",", ".").trim()
@@ -851,28 +864,14 @@ Discord: murphy_29.
       document.getElementById("estimateOut").textContent = "$" + out
     }
 
-    document.getElementById("estimateBtn").addEventListener("click", calculateEstimate)
-    document.getElementById("billionInput").addEventListener("keydown", e => {
-      if (e.key === "Enter") calculateEstimate()
-    })
+    const estimateBtn = document.getElementById("estimateBtn")
+    if (estimateBtn) estimateBtn.addEventListener("click", calculateEstimate)
 
-    const reviewsStorageKey = "bdo_reviews_v1"
-
-    function loadReviews() {
-      try {
-        const raw = localStorage.getItem(reviewsStorageKey)
-        const parsed = raw ? JSON.parse(raw) : null
-        if (Array.isArray(parsed)) return parsed
-        return []
-      } catch (e) {
-        return []
-      }
-    }
-
-    function saveReviews(list) {
-      try {
-        localStorage.setItem(reviewsStorageKey, JSON.stringify(list))
-      } catch (e) {}
+    const billionInput = document.getElementById("billionInput")
+    if (billionInput) {
+      billionInput.addEventListener("keydown", e => {
+        if (e.key === "Enter") calculateEstimate()
+      })
     }
 
     function esc(s) {
@@ -884,24 +883,28 @@ Discord: murphy_29.
         .replaceAll("'", "&#039;")
     }
 
-    function renderReviews() {
+    function renderReviews(list) {
       const host = document.getElementById("reviewsList")
       if (!host) return
 
-      const stored = loadReviews()
-      const base = [
-        { name: "Client", rating: 5, text: "Fast updates and clear milestones. Smooth handoff." },
-        { name: "Client", rating: 5, text: "Quick quote and solid communication throughout." },
-        { name: "Client", rating: 4, text: "Good pacing and kept me informed at checkpoints." }
-      ]
+      const safe = Array.isArray(list) ? list : []
+      if (!safe.length) {
+        host.innerHTML = `
+          <div class="card">
+            <b>No public reviews yet</b>
+            <div class="muted" style="margin-top:8px">
+              Add reviews to reviews.json to display them here.
+            </div>
+          </div>
+        `
+        return
+      }
 
-      const list = stored.length ? stored : base
-
-      host.innerHTML = list.map(r => {
-        const name = r.name ? esc(r.name) : "Anonymous"
-        const rating = Number(r.rating)
+      host.innerHTML = safe.map(r => {
+        const name = r && r.name ? esc(r.name) : "Anonymous"
+        const rating = Number(r && r.rating)
         const stars = isFinite(rating) ? Math.max(1, Math.min(5, Math.round(rating))) : 5
-        const text = esc(r.text || "")
+        const text = esc(r && r.text ? r.text : "")
 
         return `
           <div class="card">
@@ -915,16 +918,39 @@ Discord: murphy_29.
       }).join("")
     }
 
-    renderReviews()
+    async function loadPublicReviews() {
+      try {
+        const res = await fetch("/reviews.json", { cache: "no-store" })
+        if (!res.ok) throw new Error("bad status")
+        const data = await res.json()
+        renderReviews(data)
+      } catch (e) {
+        renderReviews([])
+      }
+    }
 
-    const submitBtn = document.getElementById("submitReview")
-    if (submitBtn) {
-      submitBtn.addEventListener("click", () => {
-        const name = (document.getElementById("reviewName").value || "").trim()
+    loadPublicReviews()
+
+    function encodeForm(form) {
+      const fd = new FormData(form)
+      const params = new URLSearchParams()
+      for (const pair of fd.entries()) {
+        const key = pair[0]
+        const val = pair[1]
+        params.append(key, val)
+      }
+      return params
+    }
+
+    const reviewForm = document.getElementById("reviewForm")
+    if (reviewForm) {
+      reviewForm.addEventListener("submit", async e => {
+        e.preventDefault()
+
         const ratingRaw = (document.getElementById("reviewRating").value || "").trim()
         const text = (document.getElementById("reviewText").value || "").trim()
-
         const rating = Number(ratingRaw)
+
         if (!text) {
           toast("Write a review first")
           return
@@ -934,25 +960,29 @@ Discord: murphy_29.
           return
         }
 
-        const list = loadReviews()
-        list.unshift({ name, rating, text })
-        saveReviews(list)
+        try {
+          const body = encodeForm(reviewForm)
+          const res = await fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: body.toString()
+          })
 
-        document.getElementById("reviewName").value = ""
-        document.getElementById("reviewRating").value = ""
-        document.getElementById("reviewText").value = ""
+          if (!res.ok) throw new Error("submit failed")
 
-        renderReviews()
-        toast("Review saved locally")
+          reviewForm.reset()
+          toast("Submitted for approval")
+        } catch (err) {
+          toast("Submission failed")
+        }
       })
     }
 
-    const clearBtn = document.getElementById("clearReviews")
-    if (clearBtn) {
-      clearBtn.addEventListener("click", () => {
-        try { localStorage.removeItem(reviewsStorageKey) } catch (e) {}
-        renderReviews()
-        toast("Local reviews cleared")
+    const resetReview = document.getElementById("resetReview")
+    if (resetReview && reviewForm) {
+      resetReview.addEventListener("click", () => {
+        reviewForm.reset()
+        toast("Cleared")
       })
     }
   </script>
