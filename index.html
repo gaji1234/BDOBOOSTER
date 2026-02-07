@@ -388,7 +388,7 @@
       .nav { justify-content: flex-start; }
     }
   </style>
-  <script type="text/javascript" src="https://api.netlify.com/CtXyE_3G9VHRTljnU7ADyf9cDZpiXfvhrmI7Idft5KbtISJnaYVf-3Wi8xF0v_kzEEJQgWF8U7dRmVK4ekBePQSiAq78XGxQdj13j5MVBhdFcesbOTE22n-LR9HLOf8-P9q_JYjlZC4Ng2vn_PK0ar0UJTDfaDiegaZdtTT1HXMnT5lJAwaDJYql0YoFwr06K6eI0zv4MlJZFV-LCfM1cET3FzBgRBFoT-6AgbGXYYeY9BttS2Y2LSYSXSCw5_4nTPAo_o4k0hzZA7Rse3JpZZkTMcURTkxOJpXrFbMi67X-Yd-_rP_qslVxMxGtwXucHkuG-TR7YDNvFP0s92jucs1IqD9EY6Eo4UQaR86s1lGIsp4McqtKSWLgNpZQZMgkNNVT3iZIS5APzCxodhxpTKP8DLTKuLSGNXb2gI5riPeYR8E2PozzW_-5xWFEGBq2V-bHLjfWYFyfXRwFDf1WpewhWX0Q1EvCBDF2w7RYFG_Wth65wmQ-4sb54wt75rkUwSyJWFEfsoQRMZNbDv665j-Zq3P0Bq93D0f9wQ"></script>
+  <script type='text/javascript' src='https://api.netlify.com/CtXyE_3G9VHRTljnU7ADyf9cDZpiXfvhrmI7Idft5KbtISJnaYVf-3Wi8xF0v_kzEEJQgWF8U7dRmVK4ekBePQSiAq78XGxQdj13j5MVBhdFcesbOTE22n-LR9HLOf8-P9q_JYjlZC4Ng2vn_PK0ar0UJTDfaDiegaZdtTT1HXMnT5lJAwaDJYql0YoFwr06K6eI0zv4MlJZFV-LCfM1cET3FzBgRBFoT-6AgbGXYYeY9BttS2Y2LSYSXSCw5_4nTPAo_o4k0hzZA7Rse3JpZZkTMcURTkxOJpXrFbMi67X-Yd-_rP_qslVxMxGtwXucHkuG-TR7YDNvFP0s92jucs1IqD9EY6Eo4UQaR86s1lGIsp4McqtKSWLgNpZQZMgkNNVT3iZIS5APzCxodhxpTKP8DLTKuLSGNXb2gI5riPeYR8E2PozzW_-5xWFEGBq2V-bHLjfWYFyfXRwFDf1WpewhWX0Q1EvCBDF2w7RYFG_Wth65wmQ-4sb54wt75rkUwSyJWFEfsoQRMZNbDv665j-Zq3P0Bq93D0f9wQ'></script>
 </head>
 
 <body>
@@ -586,7 +586,6 @@
               <li>Any special requirements are quoted before start</li>
               <li>We can combine goals for a single plan</li>
             </ul>
-            <div class="divider"></div>
 
             <div class="divider"></div>
             <div class="muted" style="white-space: pre-line">
@@ -647,7 +646,7 @@
           <div class="card">
             <h3>Leave feedback</h3>
             <div class="muted" style="margin-top: 6px">
-              Reviews are submitted to the website backend using Netlify Forms. Public reviews displayed here come from a separate file you control.
+              Submissions go to Netlify Forms. Public reviews displayed here load from reviews.json that you control.
             </div>
 
             <form id="reviewForm" name="reviews" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
@@ -674,7 +673,7 @@
 
               <div class="divider"></div>
               <div class="muted">
-                After submission, approve and publish reviews by updating reviews.json on your site.
+                After submission, approve and publish by updating reviews.json in your repo.
               </div>
             </form>
           </div>
@@ -760,6 +759,7 @@ Discord: murphy_29.
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+  <!-- Hidden detection form for Netlify (important for single page sites) -->
   <form name="reviews" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
     <input type="hidden" name="form-name" value="reviews" />
     <input name="bot-field" />
@@ -935,9 +935,7 @@ Discord: murphy_29.
       const fd = new FormData(form)
       const params = new URLSearchParams()
       for (const pair of fd.entries()) {
-        const key = pair[0]
-        const val = pair[1]
-        params.append(key, val)
+        params.append(pair[0], pair[1])
       }
       return params
     }
@@ -988,6 +986,7 @@ Discord: murphy_29.
   </script>
 </body>
 </html>
+
 
 
 
