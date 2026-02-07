@@ -407,6 +407,7 @@
         <a href="#home" data-route="home" class="active">Home</a>
         <a href="#pricing" data-route="pricing">Pricing</a>
         <a href="#requirements" data-route="requirements">Requirements</a>
+        <a href="#reviews" data-route="reviews">Feedback</a>
         <a href="#contact" data-route="contact">Contact</a>
       </nav>
     </div>
@@ -639,6 +640,67 @@
       </section>
     </section>
 
+    <!-- REVIEWS -->
+    <section class="page" id="pageReviews" data-page="reviews">
+      <section class="section">
+        <div class="sectionHeader">
+          <h2>Feedback and reviews</h2>
+          <span class="muted">Share your experience</span>
+        </div>
+
+        <div class="contactPanel">
+          <div class="card">
+            <h3>Leave feedback</h3>
+            <div class="muted" style="margin-top: 6px">
+              This form is for collecting text locally on the page. For official feedback, message on Discord.
+            </div>
+
+            <label for="reviewName">Name</label>
+            <input id="reviewName" placeholder="Optional" />
+
+            <label for="reviewRating">Rating (1 to 5)</label>
+            <input id="reviewRating" inputmode="numeric" placeholder="Example: 5" />
+
+            <label for="reviewText">Your review</label>
+            <textarea id="reviewText" placeholder="Write your feedback here"></textarea>
+
+            <div class="divider"></div>
+            <div class="ctaRow">
+              <button class="btn btnPrimary" id="submitReview" type="button">Submit review</button>
+              <button class="btn" id="clearReviews" type="button">Clear local reviews</button>
+            </div>
+
+            <div class="divider"></div>
+            <div class="muted">
+              Tip: If you want your review used as a public testimonial, send it on Discord with permission.
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Recent reviews</h3>
+            <div class="muted" style="margin-top: 6px">
+              Sample reviews can be replaced by real ones. Local submissions are stored in your browser.
+            </div>
+
+            <div class="divider"></div>
+            <div id="reviewsList" class="grid3" style="grid-template-columns: 1fr; gap: 12px"></div>
+
+            <div class="divider"></div>
+            <div class="ctaRow">
+              <a class="btn btnPrimary" href="#contact" data-route="contact">Contact on Discord</a>
+              <button class="btn" id="copyDiscordReviews" type="button">Copy Discord</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <div>
+            Disclaimer: Boosting and piloting may violate game rules. Proceed at your own risk.
+          </div>
+        </div>
+      </section>
+    </section>
+
     <!-- CONTACT -->
     <section class="page" id="pageContact" data-page="contact">
       <section class="section">
@@ -704,6 +766,7 @@ Discord: murphy_29.
       home: document.getElementById("pageHome"),
       pricing: document.getElementById("pagePricing"),
       requirements: document.getElementById("pageRequirements"),
+      reviews: document.getElementById("pageReviews"),
       contact: document.getElementById("pageContact")
     }
 
@@ -760,7 +823,8 @@ Discord: murphy_29.
       "copyDiscordPricing",
       "copyDiscordBundles",
       "copyDiscordContact",
-      "copyDiscordContact2"
+      "copyDiscordContact2",
+      "copyDiscordReviews"
     ]
 
     copyButtons.forEach(id => {
@@ -791,9 +855,110 @@ Discord: murphy_29.
     document.getElementById("billionInput").addEventListener("keydown", e => {
       if (e.key === "Enter") calculateEstimate()
     })
+
+    const reviewsStorageKey = "bdo_reviews_v1"
+
+    function loadReviews() {
+      try {
+        const raw = localStorage.getItem(reviewsStorageKey)
+        const parsed = raw ? JSON.parse(raw) : null
+        if (Array.isArray(parsed)) return parsed
+        return []
+      } catch (e) {
+        return []
+      }
+    }
+
+    function saveReviews(list) {
+      try {
+        localStorage.setItem(reviewsStorageKey, JSON.stringify(list))
+      } catch (e) {}
+    }
+
+    function esc(s) {
+      return String(s || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;")
+    }
+
+    function renderReviews() {
+      const host = document.getElementById("reviewsList")
+      if (!host) return
+
+      const stored = loadReviews()
+      const base = [
+        { name: "Client", rating: 5, text: "Fast updates and clear milestones. Smooth handoff." },
+        { name: "Client", rating: 5, text: "Quick quote and solid communication throughout." },
+        { name: "Client", rating: 4, text: "Good pacing and kept me informed at checkpoints." }
+      ]
+
+      const list = stored.length ? stored : base
+
+      host.innerHTML = list.map(r => {
+        const name = r.name ? esc(r.name) : "Anonymous"
+        const rating = Number(r.rating)
+        const stars = isFinite(rating) ? Math.max(1, Math.min(5, Math.round(rating))) : 5
+        const text = esc(r.text || "")
+
+        return `
+          <div class="card">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:12px">
+              <b>${name}</b>
+              <span class="badge" aria-label="Rating">${"★".repeat(stars)}${"☆".repeat(5 - stars)}</span>
+            </div>
+            <div class="muted" style="margin-top:8px; white-space:pre-line">${text}</div>
+          </div>
+        `
+      }).join("")
+    }
+
+    renderReviews()
+
+    const submitBtn = document.getElementById("submitReview")
+    if (submitBtn) {
+      submitBtn.addEventListener("click", () => {
+        const name = (document.getElementById("reviewName").value || "").trim()
+        const ratingRaw = (document.getElementById("reviewRating").value || "").trim()
+        const text = (document.getElementById("reviewText").value || "").trim()
+
+        const rating = Number(ratingRaw)
+        if (!text) {
+          toast("Write a review first")
+          return
+        }
+        if (!isFinite(rating) || rating < 1 || rating > 5) {
+          toast("Rating must be 1 to 5")
+          return
+        }
+
+        const list = loadReviews()
+        list.unshift({ name, rating, text })
+        saveReviews(list)
+
+        document.getElementById("reviewName").value = ""
+        document.getElementById("reviewRating").value = ""
+        document.getElementById("reviewText").value = ""
+
+        renderReviews()
+        toast("Review saved locally")
+      })
+    }
+
+    const clearBtn = document.getElementById("clearReviews")
+    if (clearBtn) {
+      clearBtn.addEventListener("click", () => {
+        try { localStorage.removeItem(reviewsStorageKey) } catch (e) {}
+        renderReviews()
+        toast("Local reviews cleared")
+      })
+    }
   </script>
 </body>
 </html>
+
 
 
 
